@@ -1,4 +1,4 @@
-import google.genai as genai
+from google import genai
 from dotenv import load_dotenv
 import os
 import json
@@ -7,9 +7,7 @@ from prompts import SYSTEM_PROMPT
 
 load_dotenv()
 
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-
-model = genai.GenerativeModel("gemini-2.5-flash")
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 def check_enquiry(enquiry):
 
@@ -21,7 +19,7 @@ def check_enquiry(enquiry):
     """
 
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(model='gemini-2.5-flash', contents=prompt)
 
         text = response.text.strip()
 
