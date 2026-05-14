@@ -1,13 +1,13 @@
 from google import genai
 from dotenv import load_dotenv
-import os
+import streamlit as st
 import json
 
 from prompts import SYSTEM_PROMPT
 
 load_dotenv()
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
 def check_enquiry(enquiry):
 
